@@ -1,0 +1,8 @@
+Welcome to Hangman!
+The player starts by picking a category,
+then a word is randomly selected to be guessed.
+The player guesses either 1 letter, or the entire word.
+If they guess a letter that is not in the hidden word,
+a body part is added. If the entire body is built
+(head, body, legs, and arms) before the player guesses
+the entire word, the game ends. 
