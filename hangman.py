@@ -23,62 +23,62 @@ class hangman:
         self.categoryDictionary = {"cities":self.citieslist, "animal":self.animallist, "fruit":self.fruitlist} #complex dictionary
     def buildbody(self, wrong, unknownword): #function to keep track on wrong guesses and print out the hangman
         if wrong == 1:
-            print '''
+            print('''
             ---+--
             |  |
             |  O
             |
             |
             ________
-            '''
+            ''')
         if wrong == 2:
-            print '''
+            print('''
             ---+--
             |  |
             |  O
             |  |
             |
             ________
-            '''
+            ''')
 
         if wrong == 3:
-            print '''
+            print('''
             ---+--
             |  |
             |  O
             |  |
-            |   7
+            |   \
             ________
-            '''
+            ''')
         if wrong == 4:
-            print'''
+            print('''
             ---+--
             |  |
             |  O
             |  |
-            | / 7
+            | / \
             ________
-            '''
+            ''')
         if wrong == 5:
-            print '''
+            print('''
             ---+--
             |  |
             |  O
             |  |-
-            | / 7
+            | / \
             ________
-            '''
+            ''')
 
         if wrong == 6:
-            print '''
+            print('''
             ---+--
             |  |
             |  O
             | -|-
-            | / 7
+            | / \
             ________
-            '''
-            print "You lost. The word was",unknownword,"."
+            ''')
+            print("You lost. The word was",unknownword,".")
             quit()
 
     def writewinningword(self, unknownword):
@@ -91,7 +91,7 @@ class player:
         self.hangman = man
 
     def pickCategory(self):
-        choice = raw_input("Pick a category: cities, animal, fruit: ")
+        choice = str(input("Pick a category: cities, animal, fruit: "))
         categorylist = self.hangman.categoryDictionary[choice]
         random1 = random.randint(0,len(categorylist)-1) #use of the imported library random
         unknownword = categorylist[random1]
@@ -110,15 +110,15 @@ class player:
         j = 0
         wrong = 0
         while '_' in blanks:
-            guess = raw_input("Guess a letter or entire word: ")
+            guess = str(input("Guess a letter or entire word: "))
             if guess == unknownword:
-                print "Nice work, you have guessed the correct word!!"
+                print("Nice work, you have guessed the correct word!!")
                 quit()
             if guess in unknownword:
                 for j in range(len(unknownword)):
                     if unknownword[j] == guess:
                         blanks[j] = guess
-                        print blanks
+                        print(blanks)
                     j+=1
             else:
                 wrong+=1
@@ -127,20 +127,20 @@ class player:
             numguess +=1
         if '_' not in blanks:
 
-            print "Congrats! You have guessed the word!"
+            print("Congrats! You have guessed the word!")
 def main():
     try:
         with open("rules.txt", 'r') as rules:
             for line in rules:
-                print line.strip()
+                print(line.strip())
     except IOError:
-        print "Could not find the rules... sorry"
+        print("Could not find the rules... sorry")
         exit()
     p = player(hangman())
     h = hangman()
     playerchoice = p.pickCategory()
     spaces = p.blankspaces(playerchoice)
-    print spaces
+    print(spaces)
     playerguess = p.guessing(playerchoice, spaces)
     h.writewinningword(playerchoice)
     #print playerguess
